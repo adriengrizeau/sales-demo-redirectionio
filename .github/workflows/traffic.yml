@@ -1,0 +1,41 @@
+name: Trafic de démo
+
+on:
+  schedule:
+    # Toutes les heures à la minute 17 (heure UTC). GitHub peut décaler l'exécution de quelques minutes.
+    - cron: "17 * * * *"
+  workflow_dispatch:
+    inputs:
+      count:
+        description: "Nombre de requêtes"
+        default: "200"
+      profile:
+        description: "Profil : mix, humans, legacy, bots, ai, scanners, errors"
+        default: "mix"
+
+jobs:
+  traffic:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Envoyer du trafic
+        env:
+          # À définir dans Settings > Secrets and variables > Actions > Variables
+          DEMO_URL: ${{ vars.DEMO_URL }}
+        run: |
+          if [ -z "$DEMO_URL" ]; then
+            echo "Variable DEMO_URL absente : rien à faire."
+            exit 0
+          fi
+          # Volume variable d'une heure à l'autre pour une courbe réaliste
+          COUNT="${{ github.event.inputs.count }}"
+          if [ -z "$COUNT" ]; then
+            HOUR=$(date -u +%H)
+            # Plus de trafic en journée (heure de Paris ≈ UTC+1/+2)
+            if [ "$HOUR" -ge 6 ] && [ "$HOUR" -le 20 ]; then COUNT=$((120 + RANDOM % 120)); else COUNT=$((30 + RANDOM % 40)); fi
+          fi
+          node scripts/traffic.mjs --url "$DEMO_URL" --count "$COUNT" --profile "${{ github.event.inputs.profile || 'mix' }}"
