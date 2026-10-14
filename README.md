@@ -33,11 +33,11 @@ Coût : 0 € (Vercel Hobby, GitHub Actions sur dépôt public, offre gratuite d
 4. Clique sur **Deploy**. Une à deux minutes plus tard, le site est en ligne sur une adresse du type `https://sales-demo-redirectionio.vercel.app`.
 5. Vérification : ouvre le site, puis l'écran **Instances** de redirection.io. L'instance `vercel-sales-demo` doit apparaître, et les premiers logs arrivent dans la foulée.
 
-### 3. Brancher le générateur de trafic
+### 3. Le générateur de trafic
 
-1. Sur GitHub, dans le dépôt : **Settings > Secrets and variables > Actions > onglet Variables > New repository variable**.
-2. Nom : `DEMO_URL`. Valeur : l'adresse Vercel, sans slash final (par exemple `https://sales-demo-redirectionio.vercel.app`).
-3. Onglet **Actions** : si GitHub le demande, active les workflows. Puis ouvre **Trafic de démo > Run workflow** pour un premier envoi immédiat.
+Il vise par défaut `https://sales-demo-redirectionio.vercel.app`. Rien à configurer.
+Pour viser une autre adresse : **Settings > Secrets and variables > Actions > onglet Variables > New repository variable**, nom `DEMO_URL`.
+Pour un envoi immédiat : onglet **Actions > Trafic de démo > Run workflow**.
 
 Ensuite, le workflow tourne tout seul toutes les heures : environ 120 à 240 requêtes en journée et 30 à 70 la nuit, soit environ 3 500 par jour.
 

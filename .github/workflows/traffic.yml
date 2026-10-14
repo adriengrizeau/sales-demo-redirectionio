@@ -4,6 +4,12 @@ on:
   schedule:
     # Toutes les heures à la minute 17 (heure UTC). GitHub peut décaler l'exécution de quelques minutes.
     - cron: "17 * * * *"
+  # Un envoi immédiat quand le générateur lui-même est modifié
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/traffic.yml"
+      - "scripts/traffic.mjs"
   workflow_dispatch:
     inputs:
       count:
@@ -24,8 +30,9 @@ jobs:
           node-version: 20
       - name: Envoyer du trafic
         env:
-          # À définir dans Settings > Secrets and variables > Actions > Variables
-          DEMO_URL: ${{ vars.DEMO_URL }}
+          # Adresse du site. Pour en changer : variable DEMO_URL dans
+          # Settings > Secrets and variables > Actions > Variables.
+          DEMO_URL: ${{ vars.DEMO_URL || 'https://sales-demo-redirectionio.vercel.app' }}
         run: |
           if [ -z "$DEMO_URL" ]; then
             echo "Variable DEMO_URL absente : rien à faire."
