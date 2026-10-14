@@ -1,6 +1,8 @@
 import type { MetadataRoute } from "next";
 import { categories, posts, products } from "@/data/catalog";
 
+export const dynamic = "force-dynamic";
+
 export default function sitemap(): MetadataRoute.Sitemap {
   const base = process.env.VERCEL_PROJECT_PRODUCTION_URL
     ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`

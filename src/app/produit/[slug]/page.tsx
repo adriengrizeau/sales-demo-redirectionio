@@ -1,15 +1,10 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
-import { euro, findCategory, findProduct, products, productsIn } from "@/data/catalog";
+import { euro, findCategory, findProduct, productsIn } from "@/data/catalog";
 import { ProductCard, Swatch } from "@/components";
 
-// Les produits retirés (voir retiredProducts) ne sont pas générés : 404.
-export const dynamicParams = false;
-
-export function generateStaticParams() {
-  return products.map((p) => ({ slug: p.slug }));
-}
+export const dynamic = "force-dynamic";
 
 type Props = { params: Promise<{ slug: string }> };
 

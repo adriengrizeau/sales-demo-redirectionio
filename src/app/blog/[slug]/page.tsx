@@ -1,13 +1,9 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
-import { findPost, posts } from "@/data/catalog";
+import { findPost } from "@/data/catalog";
 
-export const dynamicParams = false;
-
-export function generateStaticParams() {
-  return posts.map((p) => ({ slug: p.slug }));
-}
+export const dynamic = "force-dynamic";
 
 type Props = { params: Promise<{ slug: string }> };
 

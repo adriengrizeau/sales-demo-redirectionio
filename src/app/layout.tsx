@@ -3,6 +3,11 @@ import Link from "next/link";
 import "./globals.css";
 import { categories } from "@/data/catalog";
 
+// Chaque page est rendue par le serveur à chaque requête : c'est ce qui
+// déclenche l'envoi des logs à redirection.io (instrumentation.ts).
+// Une page pré-générée servie depuis le cache Vercel ne serait pas loguée.
+export const dynamic = "force-dynamic";
+
 const siteUrl = process.env.VERCEL_PROJECT_PRODUCTION_URL
   ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
   : "http://localhost:3000";

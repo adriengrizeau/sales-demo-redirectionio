@@ -1,14 +1,10 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
-import { categories, findCategory, productsIn } from "@/data/catalog";
+import { findCategory, productsIn } from "@/data/catalog";
 import { ProductCard } from "@/components";
 
-export const dynamicParams = false;
-
-export function generateStaticParams() {
-  return categories.map((c) => ({ category: c.slug }));
-}
+export const dynamic = "force-dynamic";
 
 type Props = { params: Promise<{ category: string }> };
 
