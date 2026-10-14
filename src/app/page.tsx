@@ -1,4 +1,4 @@
-import Link from "next/link";
+import Link from "@/link";
 import { categories, products, posts } from "@/data/catalog";
 import { ProductCard } from "@/components";
 

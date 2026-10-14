@@ -1,4 +1,4 @@
-import Link from "next/link";
+import Link from "@/link";
 import type { Metadata } from "next";
 import { posts } from "@/data/catalog";
 

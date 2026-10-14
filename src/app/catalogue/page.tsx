@@ -1,4 +1,4 @@
-import Link from "next/link";
+import Link from "@/link";
 import type { Metadata } from "next";
 import { categories, products } from "@/data/catalog";
 import { ProductCard } from "@/components";

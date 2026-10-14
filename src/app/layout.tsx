@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import Link from "next/link";
+import Link from "@/link";
 import "./globals.css";
 import { categories } from "@/data/catalog";
 

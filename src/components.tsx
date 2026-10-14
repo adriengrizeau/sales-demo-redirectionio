@@ -1,4 +1,4 @@
-import Link from "next/link";
+import Link from "@/link";
 import { euro, type Product } from "@/data/catalog";
 
 export function Swatch({ color }: { color: string }) {
